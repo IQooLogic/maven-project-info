@@ -1,0 +1,33 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- IntelliJ 2024 light theme gradient -->
+        <linearGradient id="lightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFFFFF"/>
+            <stop offset="100%" style="stop-color:#F2F2F3"/>
+        </linearGradient>
+        <!-- Subtle border gradient -->
+        <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#DFE1E5"/>
+            <stop offset="100%" style="stop-color:#E6E7EA"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Icon background with subtle border -->
+    <rect x="2" y="2" width="36" height="36" rx="8"
+          fill="url(#lightBg)"
+          stroke="url(#borderGrad)"
+          stroke-width="1"/>
+
+    <!-- Maven 'M' symbol -->
+    <path d="M9 9 L13 9 L20 22 L27 9 L31 9 L20 28 Z"
+          fill="#087CFA"
+          opacity="0.9"/>
+
+    <!-- Version indicators -->
+    <rect x="9" y="29" width="22" height="2.5" rx="1.25"
+          fill="#087CFA"
+          opacity="0.8"/>
+    <rect x="12" y="33" width="16" height="2" rx="1"
+          fill="#087CFA"
+          opacity="0.6"/>
+</svg>
