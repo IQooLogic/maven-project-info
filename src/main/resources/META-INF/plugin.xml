@@ -4,7 +4,7 @@
     <vendor email="iqoologic@gmail.com">Miloš Stojković</vendor>
     <description><![CDATA[
     Enhance your project tree view with instant visibility into key project details.
-    This plugin displays the artifact version and current Git branch directly in the tree view.
+    This plugin displays the artifact version and current Git branch directly in the project tree view.
     Customize colors for each of these details to suit your workflow and make important information stand out at a glance.
     Simplify version tracking and branch management, right within your IDE.
   ]]></description>
