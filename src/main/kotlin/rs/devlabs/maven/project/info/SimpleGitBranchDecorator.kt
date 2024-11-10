@@ -24,7 +24,6 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
         val virtualFile = node.virtualFile ?: return
 
         if (!virtualFile.isDirectory) return
-//        if (!isMavenProject(virtualFile)) return
         if (!isGitRepository(project, virtualFile)) return
 
         val settings = service<SimpleProjectInfoSettings>()
@@ -40,10 +39,6 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
             if (settings.useColors) settings.getGitBranchColorRGB() else SimpleTextAttributes.GRAY_ATTRIBUTES.fgColor
         ))
     }
-
-//    private fun isMavenProject(virtualFile: VirtualFile): Boolean {
-//        return virtualFile.findChild("pom.xml") != null
-//    }
 
     private fun getBranchName(project: Project, virtualFile: VirtualFile): String? {
         // Get repository in background thread
