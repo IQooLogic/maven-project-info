@@ -8,6 +8,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.ui.SimpleTextAttributes
+import git4idea.GitUtil
 import git4idea.branch.GitBranchUtil
 import git4idea.repo.GitRepository
 
@@ -23,7 +24,8 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
         val virtualFile = node.virtualFile ?: return
 
         if (!virtualFile.isDirectory) return
-        if (!isMavenProject(virtualFile)) return
+//        if (!isMavenProject(virtualFile)) return
+        if (!isGitRepository(project, virtualFile)) return
 
         val settings = service<SimpleProjectInfoSettings>()
 
@@ -39,19 +41,41 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
         ))
     }
 
-    private fun isMavenProject(virtualFile: VirtualFile): Boolean {
-        return virtualFile.findChild("pom.xml") != null
-    }
+//    private fun isMavenProject(virtualFile: VirtualFile): Boolean {
+//        return virtualFile.findChild("pom.xml") != null
+//    }
 
     private fun getBranchName(project: Project, virtualFile: VirtualFile): String? {
         // Get repository in background thread
         val repository = ReadAction.compute<GitRepository?, Throwable> {
             GitBranchUtil.guessWidgetRepository(project, virtualFile)
-        }?: return ""
+        } ?: return null
 
         // Get branch info
         return ReadAction.compute<String?, Throwable> {
             repository.currentBranch?.name ?: repository.currentRevision?.take(7)
+        }
+    }
+
+    /**
+     * Checks if the given directory is a Git repository or is under Git version control
+     *
+     * @param project Current project
+     * @param directory Virtual file representing the directory to check
+     * @return true if the directory is a Git repository or is under Git version control
+     */
+    fun isGitRepository(project: Project, directory: VirtualFile): Boolean {
+        return ReadAction.compute<Boolean, Throwable> {
+            // Check if .git directory exists in the project root
+            if (directory.findChild(".git")?.isDirectory == true) {
+                return@compute true
+            }
+
+            // If .git doesn't exist directly, check if the directory is under Git control
+            val repositories = GitUtil.getRepositories(project)
+            repositories.any { repo ->
+                directory.path == repo.root.path
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -38,11 +38,12 @@ intellijPlatform {
             sinceBuild = "233"
             untilBuild = "242.*"
         }
-//        changeNotes = """
-//            <ul>
-//            <li>Improve compatibility with the recent Platform versions</li>
-//            </ul>
-//        """.trimIndent()
+        changeNotes = """
+            <ul>
+            <li>Optimized check if project has git repository</li>
+            <li>show git branch only on projects that are git repositories</li>
+            </ul>
+        """.trimIndent()
     }
 
     pluginVerification {
