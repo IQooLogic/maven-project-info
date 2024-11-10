@@ -1,4 +1,4 @@
-package rs.devlabs.maveninfo
+package rs.devlabs.maven.project.info
 
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectViewNode

@@ -1,4 +1,4 @@
-package rs.devlabs.maveninfo
+package rs.devlabs.maven.project.info
 
 import com.intellij.ide.projectView.ProjectView
 import com.intellij.openapi.components.service
@@ -16,14 +16,16 @@ import javax.swing.JComponent
 class SimpleProjectInfoSettingsConfigurable : Configurable {
     private var settingsPanel: DialogPanel? = null
     private val settings = service<SimpleProjectInfoSettings>()
+    // Store initial values as properties
+    private var initialState = SettingsState()
 
-    // initial values
-    var initialEnabled: Boolean = true
-    var initialShowProjectVersion: Boolean = true
-    var initialShowGitBranch: Boolean = false
-    var initialUseColors: Boolean = true
-    var initialProjectVersionColor: String = "#CC7832"  // Default: orange
-    var initialGitBranchColor: String = "#6897BB"     // Default: blue
+    private data class SettingsState(
+        var showProjectVersion: Boolean = true,
+        var showGitBranch: Boolean = false,
+        var useColors: Boolean = true,
+        var projectVersionColor: String = "#CC7832",
+        var gitBranchColor: String = "#6897BB"
+    )
 
     private val showProjectVersionCheckBox = CheckBox("Show project version")
     private val showGitBranchCheckBox = CheckBox("Show git branch")
@@ -36,13 +38,11 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
     }
 
     override fun createComponent(): JComponent? {
-        // set initial state
-        initialEnabled = settings.enabled
-        initialShowProjectVersion = settings.showProjectVersion
-        initialShowGitBranch = settings.showGitBranch
-        initialUseColors = settings.useColors
-        initialProjectVersionColor = settings.projectVersionColor
-        initialGitBranchColor = settings.gitBranchColor
+        // Capture initial state
+        saveInitialState()
+
+        // Initialize UI components with current values
+        updateUIFromSettings()
 
         // Initialize color panels with current values
         projectVersionColorPanel.selectedColor = Color.decode(settings.projectVersionColor)
@@ -58,15 +58,6 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
                         }
                     )
                 }
-//                row {
-//                    checkBox("Show project version")
-//                        .bindSelected(
-//                            { settings.showProjectVersion },
-//                            {
-//                                settings.showProjectVersion = it
-//                            }
-//                        )
-//                }
                 row {
                     cell(showGitBranchCheckBox).bindSelected(
                         { settings.showGitBranch },
@@ -75,15 +66,6 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
                         }
                     )
                 }
-//                row {
-//                    checkBox("Show git branch")
-//                        .bindSelected(
-//                            { settings.showGitBranch },
-//                            {
-//                                settings.showGitBranch = it
-//                            }
-//                        )
-//                }
                 row {
                     cell(showUseColorsCheckBox).bindSelected(
                         { settings.useColors },
@@ -92,15 +74,6 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
                         }
                     )
                 }
-//                row {
-//                    checkBox("Use colors")
-//                        .bindSelected(
-//                            { settings.useColors },
-//                            {
-//                                settings.useColors = it
-//                            }
-//                        )
-//                }
             }
 
             group("Color Settings") {
@@ -117,7 +90,9 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
             row {
                 button("Reset to Defaults") {
                     settings.resetToDefaults()
-                    reset()
+                    updateUIFromSettings()
+                    settingsPanel?.reset()
+                    refreshProjectView()
                 }
             }
         }
@@ -126,16 +101,19 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
     }
 
     override fun isModified(): Boolean {
-        return settingsPanel?.isModified() == true ||
-                initialShowProjectVersion != showProjectVersionCheckBox.isSelected ||
-                initialShowGitBranch != showGitBranchCheckBox.isSelected ||
-                initialUseColors != showUseColorsCheckBox.isSelected ||
-                projectVersionColorPanel.selectedColor != Color.decode(settings.projectVersionColor) ||
-                gitBranchColorPanel.selectedColor != Color.decode(settings.gitBranchColor)
+        return settings.showProjectVersion != showProjectVersionCheckBox.isSelected ||
+                settings.showGitBranch != showGitBranchCheckBox.isSelected ||
+                settings.useColors != showUseColorsCheckBox.isSelected ||
+                settings.projectVersionColor != colorToHex(projectVersionColorPanel.selectedColor) ||
+                settings.gitBranchColor != colorToHex(gitBranchColorPanel.selectedColor)
     }
 
     override fun apply() {
         settingsPanel?.apply()
+
+        settings.showProjectVersion = showProjectVersionCheckBox.isSelected
+        settings.showGitBranch = showGitBranchCheckBox.isSelected
+        settings.useColors = showUseColorsCheckBox.isSelected
 
         projectVersionColorPanel.selectedColor?.let {
             settings.projectVersionColor = "#%02X%02X%02X".format(it.red, it.green, it.blue)
@@ -144,16 +122,30 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
             settings.gitBranchColor = "#%02X%02X%02X".format(it.red, it.green, it.blue)
         }
 
+        saveInitialState()
         refreshProjectView()
     }
 
     override fun reset() {
-        settings.showProjectVersion = initialShowProjectVersion
-        settings.showGitBranch = initialShowGitBranch
-        settings.useColors = initialUseColors
-        settings.projectVersionColor = initialProjectVersionColor
-        settings.gitBranchColor = initialGitBranchColor
+        // Restore settings to initial state
+        settings.showProjectVersion = initialState.showProjectVersion
+        settings.showGitBranch = initialState.showGitBranch
+        settings.useColors = initialState.useColors
+        settings.projectVersionColor = initialState.projectVersionColor
+        settings.gitBranchColor = initialState.gitBranchColor
 
+        projectVersionColorPanel.selectedColor = Color.decode(settings.projectVersionColor)
+        gitBranchColorPanel.selectedColor = Color.decode(settings.gitBranchColor)
+
+        updateUIFromSettings()
+        settingsPanel?.reset()
+        refreshProjectView()
+    }
+
+    private fun updateUIFromSettings() {
+        showProjectVersionCheckBox.isSelected = settings.showProjectVersion
+        showGitBranchCheckBox.isSelected = settings.showGitBranch
+        showUseColorsCheckBox.isSelected = settings.useColors
         projectVersionColorPanel.selectedColor = Color.decode(settings.projectVersionColor)
         gitBranchColorPanel.selectedColor = Color.decode(settings.gitBranchColor)
     }
@@ -162,5 +154,19 @@ class SimpleProjectInfoSettingsConfigurable : Configurable {
         ProjectManager.getInstance().openProjects.forEach { project ->
             ProjectView.getInstance(project).refresh()
         }
+    }
+
+    private fun saveInitialState() {
+        initialState = SettingsState(
+            showProjectVersion = settings.showProjectVersion,
+            showGitBranch = settings.showGitBranch,
+            useColors = settings.useColors,
+            projectVersionColor = settings.projectVersionColor,
+            gitBranchColor = settings.gitBranchColor
+        )
+    }
+
+    private fun colorToHex(color: Color?): String {
+        return color?.let { "#%02X%02X%02X".format(it.red, it.green, it.blue) } ?: "#000000"
     }
 }

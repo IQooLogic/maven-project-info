@@ -1,4 +1,4 @@
-package rs.devlabs.maveninfo
+package rs.devlabs.maven.project.info
 
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
