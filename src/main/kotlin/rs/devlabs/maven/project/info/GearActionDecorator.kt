@@ -47,7 +47,7 @@ class GearActionDecorator(private val project: Project) : ToolWindowManagerListe
     private fun createToggleShowSimpleProjectInfoSettingsAction(): ToggleShowSimpleProjectInfoSettingsAction {
         var action = ToggleShowSimpleProjectInfoSettingsAction()
         action.setOnUpdateListener(this::refreshProjectView)
-        return action;
+        return action
     }
 
     private fun refreshProjectView() {

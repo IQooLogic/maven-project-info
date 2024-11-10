@@ -19,7 +19,7 @@ class ToggleShowSimpleProjectInfoSettingsAction : com.intellij.openapi.actionSys
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {
-        return ActionUpdateThread.BGT;
+        return ActionUpdateThread.BGT
     }
 
     fun setOnUpdateListener(listener: Runnable) {
