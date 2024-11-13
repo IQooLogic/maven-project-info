@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin require-restart="true">
     <id>rs.devlabs.maven-project-info</id>
     <name>Maven Project Info</name>
     <vendor email="iqoologic@gmail.com">Miloš Stojković</vendor>
