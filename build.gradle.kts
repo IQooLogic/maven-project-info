@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -36,13 +36,13 @@ intellijPlatform {
     pluginConfiguration {
         ideaVersion {
             sinceBuild = "233"
-            untilBuild = "242.*"
+            untilBuild = "243.*"
         }
-//        changeNotes = """
-//            <ul>
-//            <li>Improve compatibility with the recent Platform versions</li>
-//            </ul>
-//        """.trimIndent()
+        changeNotes = """
+            <ul>
+            <li>Improve compatibility with the latest Platform version</li>
+            </ul>
+        """.trimIndent()
     }
 
     pluginVerification {
