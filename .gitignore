@@ -41,9 +41,7 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-.intellijPlatform/
-/.run/Run IDE with Plugin.run.xml
-/gradle/wrapper/gradle-wrapper.jar
-/gradle/wrapper/gradle-wrapper.properties
-/.kotlin/sessions/kotlin-compiler-5135782266407578599.salive
-/.kotlin/sessions/kotlin-compiler-1323788775969419109.salive
+/gradle/
+/.gradle/
+/.kotlin/
+/.intellijPlatform/

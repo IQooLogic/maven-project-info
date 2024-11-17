@@ -13,10 +13,14 @@ import git4idea.branch.GitBranchUtil
 import git4idea.repo.GitRepository
 
 class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
+
+    private val settings = service<SimpleProjectInfoSettings>()
+
     override fun decorate(
         node: ProjectViewNode<*>?,
         presentation: PresentationData?
     ) {
+        if (!settings.showGitBranch || !settings.enabled) return
         if (node == null || presentation == null) return
         if (node.name.isNullOrEmpty() || node.name.isNullOrBlank()) return
 
@@ -25,10 +29,6 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
 
         if (!virtualFile.isDirectory) return
         if (!isGitRepository(project, virtualFile)) return
-
-        val settings = service<SimpleProjectInfoSettings>()
-
-        if (!settings.showGitBranch || !settings.enabled) return
 
         val branch = getBranchName(project, virtualFile)
         if (branch.isNullOrEmpty()) return

@@ -2,10 +2,11 @@ package rs.devlabs.maven.project.info
 
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.openapi.components.service
 import kotlinx.coroutines.Runnable
 
-class ToggleShowSimpleProjectInfoSettingsAction : com.intellij.openapi.actionSystem.ToggleAction("Toggle Maven Project Info") {
+class ToggleShowSimpleProjectInfoSettingsAction : ToggleAction("Toggle Maven Project Info") {
     private val settings = service<SimpleProjectInfoSettings>()
     private var onUpdateListener: Runnable = Runnable {}
 

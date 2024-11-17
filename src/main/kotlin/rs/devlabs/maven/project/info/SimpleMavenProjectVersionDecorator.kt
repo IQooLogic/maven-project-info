@@ -10,10 +10,14 @@ import com.intellij.ui.SimpleTextAttributes
 import org.jetbrains.idea.maven.project.MavenProjectsManager
 
 class SimpleMavenProjectVersionDecorator : ProjectViewNodeDecorator {
+
+    private val settings = service<SimpleProjectInfoSettings>()
+
     override fun decorate(
         node: ProjectViewNode<*>?,
         presentation: PresentationData?
     ) {
+        if (!settings.showProjectVersion || !settings.enabled) return
         if (node == null || presentation == null) return
         if (node.name.isNullOrEmpty() || node.name.isNullOrBlank()) return
 
@@ -22,10 +26,6 @@ class SimpleMavenProjectVersionDecorator : ProjectViewNodeDecorator {
 
         if (!virtualFile.isDirectory) return
         if (!isMavenProject(virtualFile)) return
-
-        val settings = service<SimpleProjectInfoSettings>()
-
-        if (!settings.showProjectVersion || !settings.enabled) return
 
         val version = getMavenInfo(project, virtualFile)
         if (!version.isNullOrBlank()) {

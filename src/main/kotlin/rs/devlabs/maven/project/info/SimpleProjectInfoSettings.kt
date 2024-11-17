@@ -8,7 +8,7 @@ import java.awt.Color
 
 @State(
     name = "SimpleProjectInfoSettings",
-    storages = [Storage("simple-info-settings.xml")]
+    storages = [Storage("maven-info-settings.xml")]
 )
 class SimpleProjectInfoSettings : PersistentStateComponent<SimpleProjectInfoSettings> {
     var enabled: Boolean = true
