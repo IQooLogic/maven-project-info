@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,10 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>Improve compatibility with the latest Platform version</li>
+            <li>Settings will be reset!</li>
+            <li>Optimized check if project has git repository</li>
+            <li>show git branch only on projects that are git repositories</li>
+            <li>better handling of git</li>
             </ul>
         """.trimIndent()
     }
