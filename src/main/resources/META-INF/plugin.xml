@@ -1,4 +1,4 @@
-<idea-plugin require-restart="true">
+<idea-plugin>
     <id>rs.devlabs.maven-project-info</id>
     <name>Maven Project Info</name>
     <vendor email="iqoologic@gmail.com">Miloš Stojković</vendor>
@@ -16,17 +16,30 @@
     <depends>org.jetbrains.idea.maven.server.api</depends>
     <depends>Git4Idea</depends>
 
-    <projectListeners>
-        <listener class="rs.devlabs.maven.project.info.GearActionDecorator"
-                  topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
-    </projectListeners>
+    <actions>
+        <group id="rs.devlabs.maven.project.info.ProjectInfoCustomGroup"
+               text="Maven Info"
+               popup="true">
+
+            <action id="rs.devlabs.maven.project.info.ToggleShowMavenProjectInfoSettingsAction"
+                    class="rs.devlabs.maven.project.info.ToggleShowMavenProjectInfoSettingsAction"
+                    text="Toggle Maven Project Info"
+                    description="Toggle maven project info"/>
+
+<!--            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"-->
+<!--                          anchor="before"-->
+<!--                          relative-to-action="ProjectView.ToolWindow.Appearance.Actions"/>-->
+            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"
+                          anchor="first"/>
+        </group>
+    </actions>
     <extensions defaultExtensionNs="com.intellij">
         <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.SimpleMavenProjectVersionDecorator"/>
-        <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.SimpleGitBranchDecorator"/>
-        <applicationService serviceImplementation="rs.devlabs.maven.project.info.SimpleProjectInfoSettings"/>
+        <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.MavenSimpleGitBranchDecorator"/>
+        <applicationService serviceImplementation="rs.devlabs.maven.project.info.MavenProjectInfoSettings"/>
         <applicationConfigurable
-                instance="rs.devlabs.maven.project.info.SimpleProjectInfoSettingsConfigurable"
-                id="SimpleProjectInfoSettings"
+                instance="rs.devlabs.maven.project.info.MavenProjectInfoSettingsConfigurable"
+                id="MavenProjectInfoSettings"
                 displayName="Maven Project Info Settings"/>
     </extensions>
 </idea-plugin>

@@ -7,10 +7,10 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 import java.awt.Color
 
 @State(
-    name = "SimpleProjectInfoSettings",
+    name = "MavenProjectInfoSettings",
     storages = [Storage("maven-info-settings.xml")]
 )
-class SimpleProjectInfoSettings : PersistentStateComponent<SimpleProjectInfoSettings> {
+class MavenProjectInfoSettings : PersistentStateComponent<MavenProjectInfoSettings> {
     var enabled: Boolean = true
     var showProjectVersion: Boolean = true
     var showGitBranch: Boolean = false
@@ -30,9 +30,9 @@ class SimpleProjectInfoSettings : PersistentStateComponent<SimpleProjectInfoSett
         gitBranchColor = "#6897BB"
     }
 
-    override fun getState(): SimpleProjectInfoSettings = this
+    override fun getState(): MavenProjectInfoSettings = this
 
-    override fun loadState(state: SimpleProjectInfoSettings) {
+    override fun loadState(state: MavenProjectInfoSettings) {
         XmlSerializerUtil.copyBean(state, this)
     }
 }

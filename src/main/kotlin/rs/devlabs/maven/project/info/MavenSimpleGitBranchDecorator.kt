@@ -12,9 +12,9 @@ import git4idea.GitUtil
 import git4idea.branch.GitBranchUtil
 import git4idea.repo.GitRepository
 
-class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
+class MavenSimpleGitBranchDecorator : ProjectViewNodeDecorator {
 
-    private val settings = service<SimpleProjectInfoSettings>()
+    private val settings = service<MavenProjectInfoSettings>()
 
     override fun decorate(
         node: ProjectViewNode<*>?,

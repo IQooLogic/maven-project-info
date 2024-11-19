@@ -11,7 +11,7 @@ import org.jetbrains.idea.maven.project.MavenProjectsManager
 
 class SimpleMavenProjectVersionDecorator : ProjectViewNodeDecorator {
 
-    private val settings = service<SimpleProjectInfoSettings>()
+    private val settings = service<MavenProjectInfoSettings>()
 
     override fun decorate(
         node: ProjectViewNode<*>?,

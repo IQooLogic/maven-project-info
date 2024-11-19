@@ -6,8 +6,8 @@ import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.openapi.components.service
 import kotlinx.coroutines.Runnable
 
-class ToggleShowSimpleProjectInfoSettingsAction : ToggleAction("Toggle Maven Project Info") {
-    private val settings = service<SimpleProjectInfoSettings>()
+class ToggleShowMavenProjectInfoSettingsAction : ToggleAction("Toggle Maven Project Info") {
+    private val settings = service<MavenProjectInfoSettings>()
     private var onUpdateListener: Runnable = Runnable {}
 
     override fun isSelected(p0: AnActionEvent): Boolean {
@@ -21,9 +21,5 @@ class ToggleShowSimpleProjectInfoSettingsAction : ToggleAction("Toggle Maven Pro
 
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
-    }
-
-    fun setOnUpdateListener(listener: Runnable) {
-        onUpdateListener = listener
     }
 }
