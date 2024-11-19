@@ -40,10 +40,7 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>Settings will be reset!</li>
-            <li>Optimized check if project has git repository</li>
-            <li>show git branch only on projects that are git repositories</li>
-            <li>better handling of git</li>
+            <li>fixed toggle action not working</li>
             </ul>
         """.trimIndent()
     }
