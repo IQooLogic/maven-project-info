@@ -34,7 +34,7 @@
         </group>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.SimpleMavenProjectVersionDecorator"/>
+        <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.MavenProjectVersionDecorator"/>
         <projectViewNodeDecorator implementation="rs.devlabs.maven.project.info.MavenSimpleGitBranchDecorator"/>
         <applicationService serviceImplementation="rs.devlabs.maven.project.info.MavenProjectInfoSettings"/>
         <applicationConfigurable
