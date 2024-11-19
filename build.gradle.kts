@@ -44,6 +44,7 @@ intellijPlatform {
             <li>Optimized check if project has git repository</li>
             <li>show git branch only on projects that are git repositories</li>
             <li>better handling of git</li>
+            <li>fixed conflicts with other plugin</li>
             </ul>
         """.trimIndent()
     }
