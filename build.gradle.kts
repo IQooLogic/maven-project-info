@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.1"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -35,12 +35,12 @@ intellijPlatform {
 
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "233"
+            sinceBuild = "241"
             untilBuild = "243.*"
         }
         changeNotes = """
             <ul>
-            <li>Improve compatibility with the latest Platform version</li>
+            <li>fixed toggle action not working</li>
             </ul>
         """.trimIndent()
     }
