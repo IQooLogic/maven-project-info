@@ -26,9 +26,6 @@
                     text="Toggle Maven Project Info"
                     description="Toggle maven project info"/>
 
-<!--            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"-->
-<!--                          anchor="before"-->
-<!--                          relative-to-action="ProjectView.ToolWindow.Appearance.Actions"/>-->
             <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"
                           anchor="first"/>
         </group>
@@ -40,6 +37,7 @@
         <applicationConfigurable
                 instance="rs.devlabs.maven.project.info.MavenProjectInfoSettingsConfigurable"
                 id="MavenProjectInfoSettings"
-                displayName="Maven Project Info Settings"/>
+                displayName="Maven Project Info Settings"
+                groupId="tools"/>
     </extensions>
 </idea-plugin>

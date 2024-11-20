@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,7 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>fixed toggle action not working</li>
+            <li>moved plugin settings under "Tools" main group</li>
             </ul>
         """.trimIndent()
     }
