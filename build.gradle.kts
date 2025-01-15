@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -36,11 +36,11 @@ intellijPlatform {
     pluginConfiguration {
         ideaVersion {
             sinceBuild = "233"
-            untilBuild = "243.*"
+            untilBuild = provider { null }
         }
         changeNotes = """
             <ul>
-            <li>moved plugin settings under "Tools" main group</li>
+            <li>updated idea version compatibility ('Until Build' setting)</li>
             </ul>
         """.trimIndent()
     }
