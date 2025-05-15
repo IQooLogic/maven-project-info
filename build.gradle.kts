@@ -20,8 +20,6 @@ dependencies {
         bundledPlugins(
             "com.intellij.java",
             "org.jetbrains.idea.maven",
-            "org.jetbrains.idea.maven.model",
-            "org.jetbrains.idea.maven.server.api",
             "Git4Idea"
         )
         pluginVerifier()

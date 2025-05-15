@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "maven-info"
+rootProject.name = "maven-project-info"
