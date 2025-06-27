@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "rs.devlabs"
-version = "1.0.5"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
@@ -38,7 +38,8 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>updated idea version compatibility ('Until Build' setting)</li>
+            <li>removed unnecessary dependencies</li>
+            <li>compatibility with IntelliJ IDEA Ultimate 2025.2</li>
             </ul>
         """.trimIndent()
     }
