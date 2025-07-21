@@ -38,7 +38,7 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>removed unnecessary dependencies</li>
+            <li>removed unnecessary dependencies (plugin.xml)</li>
             <li>compatibility with IntelliJ IDEA Ultimate 2025.2</li>
             </ul>
         """.trimIndent()

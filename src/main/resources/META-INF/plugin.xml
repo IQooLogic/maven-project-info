@@ -12,8 +12,6 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.idea.maven</depends>
-    <depends>org.jetbrains.idea.maven.model</depends>
-    <depends>org.jetbrains.idea.maven.server.api</depends>
     <depends>Git4Idea</depends>
 
     <actions>
